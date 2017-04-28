@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ece9e9"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="2"
+            android:background="@drawable/search_track2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/search_track2_left" />
+
+            <EditText
+                android:id="@+id/search_track2_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:background="@null"
+                android:hint="合同号/到货方"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/search_track2_null"
+                android:layout_width="18dp"
+                android:layout_height="19dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/search_track2_null" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/search_track2"
+            android:layout_width="34dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.1"
+            android:background="@drawable/search_track2_edit" />
+    </LinearLayout>
+
+    <!--
+         <ListView
+        android:id="@+id/track_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
+    -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line" >
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/track_listview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+    </FrameLayout>
+
+</LinearLayout>

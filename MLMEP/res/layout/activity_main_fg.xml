@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fmain_radiogroup" >
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/fmain_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/tab_title"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/fradio_button_alarm"
+            style="@style/tab_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_tab_question" />
+
+        <RadioButton
+            android:id="@+id/fradio_button_home"
+            style="@style/tab_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_tab_message"
+            android:gravity="center_horizontal" />
+
+        <RadioButton
+            android:id="@+id/fradio_button_monitor"
+            style="@style/tab_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_tab_answer"
+            android:gravity="center_horizontal" />
+        
+         <RadioButton
+            android:id="@+id/fradio_button_complain"
+            style="@style/tab_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_tab_complain"
+            android:gravity="center_horizontal" /> 
+
+        <RadioButton
+            android:id="@+id/fradio_button_logoff"
+            style="@style/tab_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_tab_user"
+            android:gravity="center_horizontal" />
+    </RadioGroup>
+
+</RelativeLayout>

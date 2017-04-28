@@ -1,0 +1,77 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <!-- 定义checkbox style -->
+    <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_selector</item>
+        <item name="android:paddingLeft">24.0dip</item>
+        <item name="android:maxHeight">30.0dip</item>
+    </style>
+
+    <!-- 底部菜单样式 -->
+    <style name="main_tab_bottom">
+        <item name="android:textSize">@dimen/bottom_tab_font_size</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/bottom_menu_bg</item>
+        <item name="android:paddingTop">@dimen/bottom_tab_padding_up</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:drawablePadding">@dimen/bottom_tab_padding_drawable</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+    
+    <style name="AppDateTheme_Dialog" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+</style>
+
+    <style name="CustomizedWindowTitleBackground">
+        <item name="android:background">#8B8B8B</item>
+    </style>
+
+    <style name="titlebarstyle" parent="android:Theme">
+        <item name="android:windowTitleSize">45dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomizedWindowTitleBackground</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="tab_textview">
+        <item name="android:textSize">11sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:drawablePadding">4dip</item>
+    </style>
+
+	<style name="roomRatingBar" parent="@android:style/Widget.RatingBar">
+		<item name="android:progressDrawable">@drawable/room_rating_bar</item>
+		<item name="android:minHeight">24dip</item>
+		<item name="android:maxHeight">24dip</item>
+	</style>
+	
+		<style name="RatingBarsize">
+		<item name="android:minHeight">30dip</item>
+		<item name="android:maxHeight">45dip</item>
+	</style>
+
+
+</resources>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="horizontal" >
+
+    <!-- 左边 -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="6dp"
+        android:orientation="vertical" >
+
+        <!-- 上面的竖线 -->
+
+        <View
+            android:id="@+id/view_top_line"
+            android:layout_width="2dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="-1dp"
+             />
+
+        <!-- 圆点 -->
+
+        <ImageView
+            android:id="@+id/iv_expres_spot"
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/ponit_unselect" />
+
+        <View
+            android:id="@+id/view_top_line_down"
+            android:layout_width="2dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3.0dip"
+        android:layout_marginRight="3.0dip"
+        android:layout_marginTop="0.0dip"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:layout_weight="1.0"
+                android:text="物流状态"
+                android:textColor="@color/black"
+                android:textSize="16.0sp" />
+
+            <TextView
+                android:id="@+id/tracestatus_tv"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:textColor="@color/black"
+                android:textSize="16.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:layout_weight="1.0"
+                android:text="时间"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@+id/tracetime_tv"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+
+        
+             <LinearLayout
+            android:id="@+id/dinamic_trace_linelayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.0dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:layout_weight="1.0"
+                android:text="当前地点"
+                android:textColor="@color/red"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@+id/tracePosition_tv"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:textColor="@color/red"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/line_trace" >
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

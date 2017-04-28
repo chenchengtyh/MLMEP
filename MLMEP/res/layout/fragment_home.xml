@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:background="@drawable/home_tab_select_2" >
+
+        <Button
+            android:id="@+id/imageButton1"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/imageButton4"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="33dp"
+            android:background="@null" />
+
+        <Button
+            android:id="@+id/imageButton2"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="19dp"
+            android:layout_toLeftOf="@+id/imageButton1"
+            android:background="@null" />
+
+        <Button
+            android:id="@+id/imageButton3"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_alignBaseline="@+id/imageButton2"
+            android:layout_alignBottom="@+id/imageButton2"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/imageButton1"
+            android:background="@null" />
+
+        <Button
+            android:id="@+id/imageButton4"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/imageButton2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="46dp"
+            android:background="@null" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_bg"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:text="牌名品规:"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/goodsbrand_tv"
+                android:layout_width="111dp"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
+                android:text="中华（软盒）"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="数量（万支）:"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/pNumber_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50000"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+
+        <!--
+             <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.0dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:layout_weight="1.5"
+                android:text="版型编号"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@+id/versionCode_tv"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:text="1001"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:layout_weight="1.5"
+                android:text="版型名称"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@+id/versionName_tv"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:text="11mg"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.0dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:layout_weight="2.0"
+                android:text="数量（万支）"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@+id/pNumber_tv"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="50000"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:layout_weight="2.0"
+                android:text="数量（箱）"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@+id/lNumber_tv"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="5"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.0dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+                android:layout_weight="1.0"
+                android:text="金额"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@+id/taxMoney_tv"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.1"
+                android:text="120000"
+                android:textColor="@color/gray"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+        -->
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.nti.mlmep"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <!-- 权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+
+    <!-- layout自适应屏幕的大小 -->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="false"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="22"
+        tools:ignore="OldTargetApi" />
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.nti.mlmep" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- SplashScreen界面 -->
+        <activity android:name="com.nti.mlmep.activity.SplashScreenActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- login 界面 -->
+        <activity
+            android:name="com.nti.mlmep.activity.LoginActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+
+        <!-- 主界面 -->
+        <activity
+            android:name="com.nti.mlmep.activity.MainActivity"
+            android:theme="@style/titlebarstyle" >
+        </activity>
+
+        <!-- 主界面（fragment） -->
+        <activity
+            android:name="com.nti.mlmep.activity.FragmentMainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/titlebarstyle" >
+        </activity>
+        <activity
+            android:name="com.nti.mlmep.activity.TrackFragment"
+            android:screenOrientation="portrait"
+            android:theme="@style/titlebarstyle" >
+        </activity>
+        <!-- 评价页 -->
+        <activity
+            android:name="com.nti.mlmep.activity.Assess2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/titlebarstyle" >
+        </activity>
+        
+        <!-- 投诉页 -->
+        <activity
+            android:name="com.nti.mlmep.activity.ComplainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/titlebarstyle" >
+        </activity>
+
+        <!-- 主界面(单页面) -->
+        <activity
+            android:name="com.nti.mlmep.activity.MainSingleActivity"
+            android:theme="@style/titlebarstyle" >
+        </activity>
+
+        <!-- 菜单#首页 -->
+        <activity android:name="com.nti.mlmep.activity.HomeActivity" >
+        </activity>
+
+        <!-- 菜单#物流跟踪查询(查询条件界面) -->
+        <activity android:name="com.nti.mlmep.activity.TrackMainActivity" >
+        </activity>
+
+        <!-- 菜单#物流跟踪查询(查询结果界面) -->
+        <activity android:name="com.nti.mlmep.activity.TrackActivity" >
+        </activity>
+        <activity android:name="com.nti.mlmep.activity.AlarmHistoryActivity" >
+        </activity>
+
+        <!-- 菜单#物流跟踪查询(明细界面) -->
+        <activity android:name="com.nti.mlmep.activity.TrackDetailActivity" >
+        </activity>
+
+        <!-- 菜单#视频监控 -->
+        <activity android:name="com.nti.mlmep.activity.ServiceEvaluationActivity" >
+        </activity>
+
+        <!-- 菜单#门禁 -->
+        <activity android:name="com.nti.mlmep.activity.AccessActivity" >
+        </activity>
+
+        <!-- 菜单#更多 -->
+        <activity android:name="com.nti.mlmep.activity.MoreActivity" >
+        </activity>
+
+        <!-- 菜单#报警历史记录 -->
+        <activity android:name="com.nti.mlmep.activity.AlarmActivity" >
+        </activity>
+
+        <uses-library android:name="android.test.runner" />
+    </application>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        tools:ignore="ManifestOrder" />
+
+</manifest>
