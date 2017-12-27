@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="bgDark">#F2F2F2</color>
     <color name="txt_blue">#FF007CB0</color>
     <color name="txt_gray">#FF575756</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
+    <color name="gren">#707070</color>
     <color name="txt_orange">#FFEB6100</color>
     <color name="bg_gray">#FFE3E3E7</color>
     <color name="orange">#FFE84E0E</color>
@@ -29,7 +31,7 @@
     <color name="head">#2397CA</color>
     <color name="background">#97B8C9</color>
     <color name="gainsboro">#DCDCDC</color>
- <!-- 淡灰色 -->
+    <!-- 淡灰色 -->
     <!-- bottom button color -->
     <color name="class_A">#ffffffff</color>
     <color name="class_B">#ff0e0e0e</color>

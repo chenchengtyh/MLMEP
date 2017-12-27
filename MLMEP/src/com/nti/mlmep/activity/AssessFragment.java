@@ -204,7 +204,7 @@ public class AssessFragment extends Fragment implements OnClickListener,
 			//fragmentCallBack.callbackFun3(bundle_bt2);
 			trackFragment.setArguments(bundle_bt2);
 
-			ft.replace(R.id.frame_container, trackFragment);
+			ft.replace(R.id.frame_container, trackFragment,"TrackFragment");
 			ft.addToBackStack(null);
 			// ft.replace(R.id.frame_container, trackFragment);
 			ft.commit();
@@ -226,7 +226,14 @@ public class AssessFragment extends Fragment implements OnClickListener,
 				m1.put("intimeAssess", intimeAssess);
 				m1.put("intactAssess", intactAssess);
 				m1.put("serveAttitudeAssess", serveAttitudeAssess);
-				m1.put("remark", editassess.getText().toString());
+				if (editassess.getText().toString().trim().length() > 60) {
+					Toast.makeText(getActivity(), "您输入的内容已超过限定字数 ,无法提交",
+							Toast.LENGTH_SHORT).show();
+					return;
+				} else {
+					m1.put("remark", editassess.getText().toString());
+				}
+				//m1.put("remark", editassess.getText().toString());
 				// gson.toJson(m1);
 				WebServiceUtils wsutils = WebServiceUtils.getInstance();
 				wsutils.setContext(getActivity().getApplicationContext());

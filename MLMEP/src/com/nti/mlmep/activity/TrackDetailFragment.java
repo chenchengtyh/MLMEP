@@ -173,7 +173,7 @@ public class TrackDetailFragment extends Fragment {
 							public void run() {
 								Toast.makeText(getActivity(), "连接服务器失败",
 										Toast.LENGTH_LONG).show();
-
+								dialog.dismiss();
 							}
 						});
 						e.printStackTrace();
@@ -210,17 +210,18 @@ public class TrackDetailFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (TrackFragment.rel == 1) {
+				if (TrackFragment.rel_complaint == 1) {
 					Toast.makeText(getActivity(), "您刚才已投诉过此订单",
 							Toast.LENGTH_SHORT).show();
 				} else {
-//					fragmentCallBack = (FragmentMainActivity) getActivity();
+					// fragmentCallBack = (FragmentMainActivity) getActivity();
 					Bundle bundle2 = new Bundle();
-//					// bundle2.putString("tab_flag_page", "pingjia");
-//
+					// // bundle2.putString("tab_flag_page", "pingjia");
+					//
 					bundle2.putSerializable("map", trackinfo);
-//					fragmentCallBack.callbackFun4(bundle2);
-					Intent it = new Intent(getActivity(),ComplainActivity.class);
+					// fragmentCallBack.callbackFun4(bundle2);
+					Intent it = new Intent(getActivity(),
+							ComplainActivity.class);
 					it.putExtras(bundle2);
 					startActivity(it);
 				}
@@ -264,16 +265,17 @@ public class TrackDetailFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (TrackFragment.rel == 1) {
+				if (TrackFragment.rel_assess == 1) {
 					Toast.makeText(getActivity(), "您刚才已评价过此订单",
 							Toast.LENGTH_SHORT).show();
 				} else {
-//					fragmentCallBack = (FragmentMainActivity) getActivity();
+					// fragmentCallBack = (FragmentMainActivity) getActivity();
 					Bundle bundle2 = new Bundle();
 					bundle2.putSerializable("map", trackinfo);
-//					Log.d("jochen", "trackinfo=" + trackinfo.getOrderNumber());
-//					fragmentCallBack.callbackFun3(bundle2);
-					Intent it = new Intent(getActivity(),Assess2Activity.class);
+					// Log.d("jochen", "trackinfo=" +
+					// trackinfo.getOrderNumber());
+					// fragmentCallBack.callbackFun3(bundle2);
+					Intent it = new Intent(getActivity(), Assess2Activity.class);
 					it.putExtras(bundle2);
 					startActivity(it);
 				}

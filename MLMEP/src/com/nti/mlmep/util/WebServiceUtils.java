@@ -10,9 +10,12 @@ import org.myksoap2.transport.HttpTransportSE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.StrictMode;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class WebServiceUtils {
@@ -75,6 +78,18 @@ public class WebServiceUtils {
 			nameSpace = pro.getProperty("ws.nameSpace");
 			endPoint = pro.getProperty("ws." + wstag + ".endPoint");
 		}
+		SharedPreferences mSharedPreferences = context
+				.getSharedPreferences("ServiceUrl", Context.MODE_PRIVATE);
+		String url = mSharedPreferences.getString("service_url", "").toString();
+		if (!url.isEmpty()) {
+			nameSpace = url + "/L" + nameSpace.split("/L")[1];
+			endPoint = url + "/L" + endPoint.split("/L")[1];
+			//nameSpace = "http://61.190.39.3:9091/LMEP/services/InterfacesForPhone/";
+			//endPoint = "http://61.190.39.3:9091/LMEP/services/InterfacesForPhone";
+			//Log.d("jochen", "nameSpace="+nameSpace.length()  +  "endPoint="+endPoint.length());
+			//Log.d("jochen", "nameSpace1="+nameSpace1.length()  +  "endPoint1="+endPoint1.length());
+		}
+
 		soapAction = nameSpace + methodName;
 		// 指定WebService的命名空间和调用的方法名
 		SoapObject rpc = new SoapObject(nameSpace, methodName);
@@ -95,8 +110,8 @@ public class WebServiceUtils {
 
 		// 等价于envelope.bodyOut = rpc;
 		envelope.setOutputSoapObject(rpc);
-		//120000
-		HttpTransportSE transport = new HttpTransportSE(endPoint, 60000);
+		// 120000
+		HttpTransportSE transport = new HttpTransportSE(endPoint, 120000);
 		transport.call(soapAction, envelope);
 
 		SoapObject object = (SoapObject) envelope.bodyIn;

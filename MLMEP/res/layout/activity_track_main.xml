@@ -55,7 +55,6 @@
                         android:background="@null"
                         android:hint="到货地点"
                         android:text="" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -83,7 +82,6 @@
                         android:layout_weight="0.65"
                         android:background="@null"
                         android:hint="订单号" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -111,7 +109,6 @@
                         android:layout_weight="0.65"
                         android:background="@null"
                         android:hint="合同号" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -153,17 +150,6 @@
                     android:gravity="center"
                     android:orientation="horizontal" >
 
-                    <!--
-                         <TextView
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_weight="0.21"
-                        android:text="起始日期:"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                    -->
-
                     <LinearLayout
                         android:layout_width="145dp"
                         android:layout_height="42dp"
@@ -180,14 +166,13 @@
                             android:layout_marginRight="8dp"
                             android:background="@drawable/et_date_left" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/et_ben_date"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.65"
                             android:background="@null"
                             android:hint="起始时间"
-                            android:enabled="false"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -215,14 +200,13 @@
                             android:layout_marginRight="8dp"
                             android:background="@drawable/et_date_left" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/et_end_date"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.65"
                             android:background="@null"
                             android:hint="结束时间"
-                            android:enabled="false"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -256,7 +240,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="8dp"
                         android:background="@drawable/date1" />
-                </LinearLayout>
+                </LinearLayout>
                 -->
 
 
@@ -311,7 +295,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_weight="0.65"
                         android:text="" />
-                </LinearLayout>
+                </LinearLayout>
                 -->
 
                 <LinearLayout
@@ -329,12 +313,14 @@
                         android:text="查  询"
                         android:textColor="@color/white" />
 
-<!--                     <Button
+                    <!--
+                         <Button
                         android:id="@+id/bt1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="清  空" /> -->
+                        android:text="清  空" />
+                    -->
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

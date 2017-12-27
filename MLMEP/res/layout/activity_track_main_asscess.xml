@@ -135,6 +135,7 @@
                     -->
 
                     <LinearLayout
+                        
                         android:layout_width="145dp"
                         android:layout_height="42dp"
                         android:layout_weight="1"
@@ -143,21 +144,20 @@
                         android:orientation="horizontal" >
 
                         <Button
-                            android:id="@+id/bt_date1"
+                            android:id="@+id/bt_date1"                           
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_marginLeft="3dp"
                             android:layout_marginRight="8dp"
                             android:background="@drawable/et_date_left" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/et_ben_date"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.65"
                             android:background="@null"
                             android:hint="起始时间"
-                            android:enabled="false"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -169,6 +169,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        
                         android:layout_width="145dp"
                         android:layout_height="42dp"
                         android:layout_marginLeft="8dp"
@@ -185,14 +186,13 @@
                             android:layout_marginRight="8dp"
                             android:background="@drawable/et_date_left" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/et_end_date"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.65"
                             android:background="@null"
                             android:hint="结束时间"
-                            android:enabled="false"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 

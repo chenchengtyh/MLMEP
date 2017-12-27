@@ -28,6 +28,7 @@ public class TrackTraceAdapter extends BaseAdapter {
 	private View view_top_line;
 	private ImageView iv_expres_spot;
 	private View view_top_line_down;
+	private TextView trace_time;
 
 	/**
 	 * @param mainActivity
@@ -64,9 +65,15 @@ public class TrackTraceAdapter extends BaseAdapter {
 				.findViewById(R.id.tracestatus_tv);
 		view_top_line = view.findViewById(R.id.view_top_line);
 		view_top_line_down = view.findViewById(R.id.view_top_line_down);
+		trace_time = (TextView) view.findViewById(R.id.trace_time);
 		view_top_line_down.setBackgroundColor(color.gainsboro);
 		iv_expres_spot = (ImageView) view.findViewById(R.id.iv_expres_spot);
 
+		if(info.getOrderStatusText().indexOf("车辆到达") != -1){
+			trace_time.setText("最后定位时间");
+		}else{
+			trace_time.setText("时间");
+		}
 		tracetime_tv.setText(TimeUtils.dateToStr(info.getRecordDate()));
 		tracestatus_tv.setText(info.getOrderStatusText());
 

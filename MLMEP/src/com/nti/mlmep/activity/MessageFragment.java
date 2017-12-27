@@ -93,9 +93,8 @@ public class MessageFragment extends Fragment implements OnClickListener {
 			}
 				break;
 			case 3: {
-				Toast.makeText(getActivity(),
-						"查询不到数据，请检查条件！", Toast.LENGTH_LONG)
-						.show();
+				Toast.makeText(getActivity(), "查询不到数据，请检查条件！",
+						Toast.LENGTH_LONG).show();
 				LinkedList<TrackMessage> trackMessage = new LinkedList<TrackMessage>();
 				MessageAdapter mAdapter = new MessageAdapter(getActivity(),
 						trackMessage);
@@ -127,7 +126,7 @@ public class MessageFragment extends Fragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Bundle bundle2 = new Bundle();
-		bundle2.putString("change_title", "change_back_home");
+		bundle2.putString("change_title", "change_back_user");
 		fragmentCallBack.callbackFun1(bundle2);
 		View view = inflater.inflate(R.layout.fragment_mymessage, container,
 				false);
@@ -152,6 +151,16 @@ public class MessageFragment extends Fragment implements OnClickListener {
 
 				// 拼接joson
 				params = new HashMap<String, Object>();
+				SharedPreferences sp = getActivity().getSharedPreferences(
+						"userInfo", Context.MODE_PRIVATE);
+				String username = null;
+				String password = null;
+				if (sp.getBoolean("ISCHECK", false)) {
+					username = sp.getString("username", "");
+					password = sp.getString("password", "");
+				}
+				params.put("password", password);
+				params.put("userName", username);
 				params.put("orderNumber", "");
 				// params.put("contractNumber",
 				// message_ContractNumber.getText().toString());
@@ -221,13 +230,14 @@ public class MessageFragment extends Fragment implements OnClickListener {
 									trackMessage.addLast(trackMessage_single);
 								}
 							}
+							trackMessage = FilterMessage(trackMessage);// 筛选
 							Message msg2 = new Message();
 							msg2.what = 2;
 							msg2.obj = trackMessage;
 							mHandler.sendMessage(msg2);
 						} else {
-//							Toast.makeText(getActivity(), "查询不到数据，请检查条件！",
-//									Toast.LENGTH_LONG).show();
+							// Toast.makeText(getActivity(), "查询不到数据，请检查条件！",
+							// Toast.LENGTH_LONG).show();
 							Message msg = new Message();
 							msg.what = 3;
 							mHandler.sendMessage(msg);
@@ -322,6 +332,33 @@ public class MessageFragment extends Fragment implements OnClickListener {
 		}
 	};
 
+	private LinkedList<TrackMessage> FilterMessage(
+			LinkedList<TrackMessage> trackMessage) {
+		// TODO Auto-generated method stub
+
+		LinkedList<TrackMessage> tm = new LinkedList<TrackMessage>();
+
+		if (trackMessage.size() > 1) {
+			for (int i = 0; i < trackMessage.size() - 1; i++) {
+				if (trackMessage.get(i).getcontractNumber()
+						.equals(trackMessage.get(i + 1).getcontractNumber())) {
+					if (Integer.parseInt(trackMessage.get(i).getmessageType()) < Integer
+							.parseInt(trackMessage.get(i + 1).getmessageType())) {
+						if (!tm.isEmpty()) {
+							tm.removeLast();
+						}
+						tm.addLast(trackMessage.get(i + 1));
+					}
+				} else {
+					tm.addLast(trackMessage.get(i + 1));
+				}
+			}
+		} else {
+			tm = trackMessage;
+		}
+		return tm;
+	}
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -349,6 +386,16 @@ public class MessageFragment extends Fragment implements OnClickListener {
 					public void run() {
 						// 拼接joson
 						Map<String, Object> params = new HashMap<String, Object>();
+						SharedPreferences sp = getActivity().getSharedPreferences(
+								"userInfo", Context.MODE_PRIVATE);
+						String username = null;
+						String password = null;
+						if (sp.getBoolean("ISCHECK", false)) {
+							username = sp.getString("username", "");
+							password = sp.getString("password", "");
+						}
+						params.put("password", password);
+						params.put("userName", username);
 						params.put("orderNumber", "");
 						// params.put("contractNumber",
 						// message_ContractNumber.getText().toString());
@@ -411,6 +458,7 @@ public class MessageFragment extends Fragment implements OnClickListener {
 									JSONArray arr = new JSONArray(result
 											.getProperty(0).toString());
 									for (int i = 0; i < arr.length(); i++) {
+
 										JSONObject temp = (JSONObject) arr
 												.get(i);
 										// 将json数据转换成TrackMessage对象
@@ -422,13 +470,13 @@ public class MessageFragment extends Fragment implements OnClickListener {
 													.addLast(trackMessage_single);
 										}
 									}
-
+									trackMessage = FilterMessage(trackMessage);// 筛选
 									Message msg2 = new Message();
 									msg2.what = 1;
 									msg2.obj = trackMessage;
 									mHandler.sendMessage(msg2);
 								} else {
-									
+
 									Message msg2 = new Message();
 									msg2.what = 3;
 									msg2.obj = trackMessage;
@@ -454,6 +502,7 @@ public class MessageFragment extends Fragment implements OnClickListener {
 						mHandler.sendMessage(msg);
 
 					}
+
 				}).start();
 			}
 

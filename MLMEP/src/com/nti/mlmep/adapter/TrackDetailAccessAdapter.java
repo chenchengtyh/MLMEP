@@ -75,12 +75,20 @@ public class TrackDetailAccessAdapter extends BaseAdapter {
 		View view = LayoutInflater.from(mContext).inflate(
 				R.layout.activity_track_access, parent, false);
 		TrackInfoBean info = trackinfo.get(position);
-		
+
 		TextView access_flag = (TextView) view.findViewById(R.id.access_flag);
-        if(info.geteva_flag().equals("1")){
-        	access_flag.setText("已评价");
-        	access_flag.setTextColor(Color.RED);
-        }
+		// if (info.geteva_flag().equals("1") &&
+		// (info.getMobileEva().get(0).getevaState().equals("2"))
+		// && (!info.getMobileEva().get(0).getintimeAssess().equals(""))
+		// && (!info.getMobileEva().get(0).getintactAssess().equals(""))
+		// && (!info.getMobileEva().get(0).getserveAttitudeAssess()
+		// .equals(""))) {
+		if ((null != info.getMobileEva()) && (info.getMobileEva().size() != 0)) {
+			if (info.getMobileEva().get(0).getevaState().equals("2")) {
+				access_flag.setText("已评价");
+				access_flag.setTextColor(Color.RED);
+			}
+		}
 		// 订单号
 		TextView orderNumberTv = (TextView) view
 				.findViewById(R.id.orderNumber_tv);

@@ -36,17 +36,21 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,11 +97,11 @@ public class TrackFragment extends Fragment implements Return {
 	private boolean flag = false;
 	static boolean hasMoreData = true;
 	private View view;
-	public static int rel = 0;//标记位，当用户评价投诉成功后返回上层自动刷新数据,1刷新,否则不刷新
-
-//	public void setResult(int rel) {
-//		this.rel = rel;
-//	}
+	public static int rel_assess = 0;// 标记位，当用户评价成功后返回上层自动刷新数据,1刷新,否则不刷新
+	public static int rel_complaint = 0;// 标记位，当用户投诉成功后返回上层自动刷新数据,1刷新,否则不刷新
+	// public void setResult(int rel) {
+	// this.rel = rel;
+	// }
 
 	Handler handler = new Handler() {
 
@@ -150,9 +154,9 @@ public class TrackFragment extends Fragment implements Return {
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
-		Log.d("jochen", "11onAttach="+hasMoreData);
-		//重新唤醒时判断是否需要重新加载数据
-		if (rel == 1) {
+		Log.d("jochen", "11onAttach=" + hasMoreData);
+		// 重新唤醒时判断是否需要重新加载数据
+		if ((rel_assess == 1)||(rel_complaint == 1)) {
 			init();
 			webserviceInit();
 			uiInit();// UI初始化
@@ -161,7 +165,8 @@ public class TrackFragment extends Fragment implements Return {
 			mPullListView.setHasMoreData(hasMoreData);
 			setLastUpdateTime();
 			mPullListView.doPullRefreshing(true, 200);
-			rel = 0;
+			rel_assess = 0;
+			rel_complaint = 0;
 		}
 		super.onResume();
 	}
@@ -170,8 +175,8 @@ public class TrackFragment extends Fragment implements Return {
 	public void onStop() {
 		// TODO Auto-generated method stub
 		flag = true;
-		
-		Log.d("jochen", "11onStop="+hasMoreData);
+
+		Log.d("jochen", "11onStop=" + hasMoreData);
 		super.onStop();
 	}
 
@@ -265,9 +270,24 @@ public class TrackFragment extends Fragment implements Return {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String serach_track2 = search_track2_edit.getText().toString();
+				String serach_track2 = search_track2_edit.getText().toString().trim();
+				if (serach_track2.equals("")) {
+					Toast.makeText(getActivity(), "请输入(合同号)或(到货方)",
+							Toast.LENGTH_SHORT).show();
+					return;
+				}
 				Map<String, Object> params = new HashMap<String, Object>();
 				params = serializableMap.getMap();
+				SharedPreferences sp = getActivity().getSharedPreferences(
+						"userInfo", Context.MODE_PRIVATE);
+				String username = null;
+				String password = null;
+				if (sp.getBoolean("ISCHECK", false)) {
+					username = sp.getString("username", "");
+					password = sp.getString("password", "");
+				}
+				params.put("password", password);
+				params.put("userName", username);
 				// 通过中文判断识别输入的是合同号还是发货地
 				if (serach_track2.getBytes().length != serach_track2.length()) {
 					params.put("contractNumber", "");
@@ -276,6 +296,8 @@ public class TrackFragment extends Fragment implements Return {
 					params.put("contractNumber", serach_track2);
 					params.put("customName", "");
 				}
+				 params.put("startTime","");
+				 params.put("endTime","");
 				serializableMap.setMap(params);
 				init();
 				webserviceInit();
@@ -688,6 +710,10 @@ public class TrackFragment extends Fragment implements Return {
 	@Override
 	public void ReturntoTrack_check(int pos) {
 		// TODO Auto-generated method stub
+		if(0 == mListItems.size()){
+			Toast.makeText(getActivity(), "正在刷新中...", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		TrackInfoBean alarmInfo = mListItems.get(pos);
 		// updatePosition(alarmInfo);
 		FragmentManager fm = getFragmentManager();
@@ -698,7 +724,8 @@ public class TrackFragment extends Fragment implements Return {
 		fragmentCallBack.callbackFun1(mBundle);
 		mBundle.putSerializable("AlarmInfo", (Serializable) alarmInfo);
 		trackDetailFragment.setArguments(mBundle);
-		ft.replace(R.id.frame_container, trackDetailFragment);
+		ft.replace(R.id.frame_container, trackDetailFragment,
+				"TrackDetailFragment");
 		ft.addToBackStack(null);
 		ft.commit();
 	}
@@ -707,6 +734,10 @@ public class TrackFragment extends Fragment implements Return {
 	@Override
 	public void ReturntoTrack_assess(int pos) {
 		// TODO Auto-generated method stub
+		if(0 == mListItems.size()){
+			Toast.makeText(getActivity(), "正在刷新中...", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		TrackInfoBean alarmInfo = mListItems.get(pos);
 		Log.d("jochen",
 				"alarmInfo: " + alarmInfo.getOrderNumber() + "--"
@@ -719,15 +750,15 @@ public class TrackFragment extends Fragment implements Return {
 						+ alarmInfo.getDriverName() + "--" + alarmInfo.getTel()
 						+ "--" + alarmInfo.getMobileComplaint().size());
 
-//		fragmentCallBack = (FragmentMainActivity) getActivity();
-//		Bundle bundle2 = new Bundle();
-//		bundle2.putString("tab_flag_page", "pingjia");
-//		bundle2.putSerializable("map", alarmInfo);
-//		fragmentCallBack.callbackFun3(bundle2);
-		
+		// fragmentCallBack = (FragmentMainActivity) getActivity();
+		// Bundle bundle2 = new Bundle();
+		// bundle2.putString("tab_flag_page", "pingjia");
+		// bundle2.putSerializable("map", alarmInfo);
+		// fragmentCallBack.callbackFun3(bundle2);
+
 		Bundle bundle2 = new Bundle();
 		bundle2.putSerializable("map", alarmInfo);
-		Intent it = new Intent(getActivity(),Assess2Activity.class);
+		Intent it = new Intent(getActivity(), Assess2Activity.class);
 		it.putExtras(bundle2);
 		startActivity(it);
 
@@ -748,6 +779,10 @@ public class TrackFragment extends Fragment implements Return {
 	@Override
 	public void ReturntoTrack_compalin(int pos) {
 		// TODO Auto-generated method stub
+		if(0 == mListItems.size()){
+			Toast.makeText(getActivity(), "正在刷新中...", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		TrackInfoBean alarmInfo = mListItems.get(pos);
 		Log.d("jochen",
 				"alarmInfo: " + alarmInfo.getOrderNumber() + "--"
@@ -759,15 +794,15 @@ public class TrackFragment extends Fragment implements Return {
 						+ alarmInfo.getRepertoryName() + "--"
 						+ alarmInfo.getDriverName() + "--" + alarmInfo.getTel());
 
-//		fragmentCallBack = (FragmentMainActivity) getActivity();
-//		Bundle bundle2 = new Bundle();
-//		bundle2.putString("tab_flag_page", "tousu");
-//		bundle2.putSerializable("map", alarmInfo);
-//		fragmentCallBack.callbackFun4(bundle2);
-		
+		// fragmentCallBack = (FragmentMainActivity) getActivity();
+		// Bundle bundle2 = new Bundle();
+		// bundle2.putString("tab_flag_page", "tousu");
+		// bundle2.putSerializable("map", alarmInfo);
+		// fragmentCallBack.callbackFun4(bundle2);
+
 		Bundle bundle2 = new Bundle();
 		bundle2.putSerializable("map", alarmInfo);
-		Intent it = new Intent(getActivity(),ComplainActivity.class);
+		Intent it = new Intent(getActivity(), ComplainActivity.class);
 		it.putExtras(bundle2);
 		startActivity(it);
 

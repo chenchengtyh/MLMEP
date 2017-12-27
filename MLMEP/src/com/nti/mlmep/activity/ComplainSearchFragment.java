@@ -43,8 +43,8 @@ public class ComplainSearchFragment extends Fragment implements OnClickListener 
 	private EditText et_pn;
 	private EditText et_tc;
 	private Spinner et_os;
-	private EditText et_ben_date;
-	private EditText et_end_date;
+	private TextView et_ben_date;
+	private TextView et_end_date;
 	private EditText et_al;
 	private int b_mYear = 0;
 	private int b_mMonth;
@@ -107,8 +107,10 @@ public class ComplainSearchFragment extends Fragment implements OnClickListener 
 		et_cn = (EditText) view.findViewById(R.id.et_cn);
 		et_os = (Spinner) view.findViewById(R.id.et_os);
 		et_al = (EditText) view.findViewById(R.id.et_al);
-		et_ben_date = (EditText) view.findViewById(R.id.et_ben_date);
-		et_end_date = (EditText) view.findViewById(R.id.et_end_date);
+		et_ben_date = (TextView) view.findViewById(R.id.et_ben_date);
+		et_end_date = (TextView) view.findViewById(R.id.et_end_date);
+		et_ben_date.setOnClickListener(this);
+		et_end_date.setOnClickListener(this);
 		final Calendar c = Calendar.getInstance();
 		if (0 == e_mYear) {
 
@@ -120,18 +122,34 @@ public class ComplainSearchFragment extends Fragment implements OnClickListener 
 		// 默认显示近3天的数据
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		et_end_date.setText(TimeUtils.getTime(calendar.getTimeInMillis(),
-				TimeUtils.DATE_FORMAT_DATE));
+		if(0 == e_mYear){
+			et_end_date.setText(TimeUtils.getTime(calendar.getTimeInMillis(),
+					TimeUtils.DATE_FORMAT_DATE));
+		}else{
+			et_end_date.setText(new StringBuilder()
+			.append(e_mYear)
+			.append("-")
+			.append((e_mMonth + 1) < 10 ? "0" + (e_mMonth + 1)
+					: (e_mMonth + 1)).append("-")
+			.append((e_mDay < 10) ? "0" + e_mDay : e_mDay));
+		}
+		
 		calendar.add(Calendar.DATE, -3);
 		if (0 == b_mYear) {
 
 			b_mYear = calendar.get(Calendar.YEAR);
 			b_mMonth = calendar.get(Calendar.MONTH);
 			b_mDay = calendar.get(Calendar.DAY_OF_MONTH);
+			et_ben_date.setText(TimeUtils.getTime(calendar.getTimeInMillis(),
+					TimeUtils.DATE_FORMAT_DATE));
+		} else{
+			et_ben_date.setText(new StringBuilder()
+			.append(b_mYear)
+			.append("-")
+			.append((b_mMonth + 1) < 10 ? "0" + (b_mMonth + 1)
+					: (b_mMonth + 1)).append("-")
+			.append((b_mDay < 10) ? "0" + b_mDay : b_mDay));
 		}
-		et_ben_date.setText(TimeUtils.getTime(calendar.getTimeInMillis(),
-				TimeUtils.DATE_FORMAT_DATE));
-
 	}
 
 	@Override
@@ -144,6 +162,17 @@ public class ComplainSearchFragment extends Fragment implements OnClickListener 
 			ft = fm.beginTransaction();
 			TrackFragment trackFragment = new TrackFragment();
 			Map<String, Object> params = new HashMap<String, Object>();
+			
+			SharedPreferences sp = getActivity().getSharedPreferences(
+					"userInfo", Context.MODE_PRIVATE);
+			String username = null;
+			String password = null;
+			if (sp.getBoolean("ISCHECK", false)) {
+				username = sp.getString("username", "");
+				password = sp.getString("password", "");
+			}
+			params.put("password", password);
+			params.put("userName", username);
 			params.put("orderNumber", et_on.getText().toString());
 			params.put("contractNumber", et_cn.getText().toString());
 
@@ -164,7 +193,7 @@ public class ComplainSearchFragment extends Fragment implements OnClickListener 
 			// fragmentCallBack.callbackFun1(bundle_bt2);
 			trackFragment.setArguments(bundle_bt2);
 
-			ft.replace(R.id.frame_container, trackFragment);
+			ft.replace(R.id.frame_container, trackFragment,"TrackFragment");
 			ft.addToBackStack(null);
 			// ft.replace(R.id.frame_container, trackFragment);
 			ft.commit();
@@ -198,7 +227,14 @@ public class ComplainSearchFragment extends Fragment implements OnClickListener 
 			new DatePickerDialog(getActivity(),R.style.AppDateTheme_Dialog, endDateSetListener,
 					e_mYear, e_mMonth, e_mDay).show();
 			break;
-
+		case R.id.et_ben_date:
+			new DatePickerDialog(getActivity(), R.style.AppDateTheme_Dialog,
+					benDateSetListener, b_mYear, b_mMonth, b_mDay).show();
+			break;
+		case R.id.et_end_date:
+			new DatePickerDialog(getActivity(), R.style.AppDateTheme_Dialog,
+					endDateSetListener, e_mYear, e_mMonth, e_mDay).show();
+			break;
 		default:
 			break;
 		}

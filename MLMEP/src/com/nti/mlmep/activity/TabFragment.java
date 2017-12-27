@@ -37,6 +37,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
@@ -53,8 +54,8 @@ public class TabFragment extends Fragment implements OnClickListener {
 	private EditText et_pn;
 	private EditText et_tc;
 	private Spinner et_os;
-	private EditText et_ben_date;
-	private EditText et_end_date;
+	private TextView et_ben_date;
+	private TextView et_end_date;
 	private EditText et_al;
 	private int b_mYear = 0;
 	private int b_mMonth;
@@ -190,8 +191,11 @@ public class TabFragment extends Fragment implements OnClickListener {
 		et_cn = (EditText) view.findViewById(R.id.et_cn);
 		et_os = (Spinner) view.findViewById(R.id.et_os);
 		et_al = (EditText) view.findViewById(R.id.et_al);
-		et_ben_date = (EditText) view.findViewById(R.id.et_ben_date);
-		et_end_date = (EditText) view.findViewById(R.id.et_end_date);
+		
+		et_ben_date = (TextView) view.findViewById(R.id.et_ben_date);
+		et_end_date = (TextView) view.findViewById(R.id.et_end_date);
+		et_ben_date.setOnClickListener(this);
+		et_end_date.setOnClickListener(this);
 		final Calendar c = Calendar.getInstance();
 		if (0 == e_mYear) {
 			e_mYear = c.get(Calendar.YEAR);
@@ -202,16 +206,34 @@ public class TabFragment extends Fragment implements OnClickListener {
 		// 默认显示近3天的数据
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		et_end_date.setText(TimeUtils.getTime(calendar.getTimeInMillis(),
-				TimeUtils.DATE_FORMAT_DATE));
+		if(0 == e_mYear){
+			et_end_date.setText(TimeUtils.getTime(calendar.getTimeInMillis(),
+					TimeUtils.DATE_FORMAT_DATE));
+		}else{
+			et_end_date.setText(new StringBuilder()
+			.append(e_mYear)
+			.append("-")
+			.append((e_mMonth + 1) < 10 ? "0" + (e_mMonth + 1)
+					: (e_mMonth + 1)).append("-")
+			.append((e_mDay < 10) ? "0" + e_mDay : e_mDay));
+		}
+		
 		calendar.add(Calendar.DATE, -3);
 		if (0 == b_mYear) {
+
 			b_mYear = calendar.get(Calendar.YEAR);
 			b_mMonth = calendar.get(Calendar.MONTH);
 			b_mDay = calendar.get(Calendar.DAY_OF_MONTH);
+			et_ben_date.setText(TimeUtils.getTime(calendar.getTimeInMillis(),
+					TimeUtils.DATE_FORMAT_DATE));
+		} else{
+			et_ben_date.setText(new StringBuilder()
+			.append(b_mYear)
+			.append("-")
+			.append((b_mMonth + 1) < 10 ? "0" + (b_mMonth + 1)
+					: (b_mMonth + 1)).append("-")
+			.append((b_mDay < 10) ? "0" + b_mDay : b_mDay));
 		}
-		et_ben_date.setText(TimeUtils.getTime(calendar.getTimeInMillis(),
-				TimeUtils.DATE_FORMAT_DATE));
 
 		// 将可选内容与ArrayAdapter连接起来
 		// '01','订单生成','02','运输单形成','03'
@@ -273,6 +295,17 @@ public class TabFragment extends Fragment implements OnClickListener {
 			ft = fm.beginTransaction();
 			TrackFragment trackFragment = new TrackFragment();
 			Map<String, Object> params = new HashMap<String, Object>();
+
+			SharedPreferences sp = getActivity().getSharedPreferences(
+					"userInfo", Context.MODE_PRIVATE);
+			String username = null;
+			String password = null;
+			if (sp.getBoolean("ISCHECK", false)) {
+				username = sp.getString("username", "");
+				password = sp.getString("password", "");
+			}
+			params.put("password", password);
+			params.put("userName", username);
 			params.put("orderNumber", et_on.getText().toString());
 			params.put("contractNumber", et_cn.getText().toString());
 			// params.put("plateNumber", et_pn.getText().toString());
@@ -302,7 +335,7 @@ public class TabFragment extends Fragment implements OnClickListener {
 			fragmentCallBack.callbackFun1(bundle_bt2);
 			trackFragment.setArguments(bundle_bt2);
 
-			ft.replace(R.id.frame_container, trackFragment);
+			ft.replace(R.id.frame_container, trackFragment, "TrackFragment");
 			ft.addToBackStack(null);
 			// ft.replace(R.id.frame_container, trackFragment);
 			ft.commit();
@@ -320,20 +353,28 @@ public class TabFragment extends Fragment implements OnClickListener {
 			// et_end_date.setText(TimeUtils.getTime(Calendar.getInstance().getTimeInMillis(),TimeUtils.DATE_FORMAT_DATE));
 			break;
 		case R.id.bt_date1:
-			new DatePickerDialog(getActivity(),R.style.AppDateTheme_Dialog, benDateSetListener,
-					b_mYear, b_mMonth, b_mDay).show();
+			new DatePickerDialog(getActivity(), R.style.AppDateTheme_Dialog,
+					benDateSetListener, b_mYear, b_mMonth, b_mDay).show();
 			break;
 		case R.id.bt_date2:
-			new DatePickerDialog(getActivity(),R.style.AppDateTheme_Dialog, endDateSetListener,
-					e_mYear, e_mMonth, e_mDay).show();
+			new DatePickerDialog(getActivity(), R.style.AppDateTheme_Dialog,
+					endDateSetListener, e_mYear, e_mMonth, e_mDay).show();
 			break;
 		case R.id.bt_date1c:
-			new DatePickerDialog(getActivity(),R.style.AppDateTheme_Dialog, benDateSetListener,
-					b_mYear, b_mMonth, b_mDay).show();
+			new DatePickerDialog(getActivity(), R.style.AppDateTheme_Dialog,
+					benDateSetListener, b_mYear, b_mMonth, b_mDay).show();
 			break;
 		case R.id.bt_date2c:
-			new DatePickerDialog(getActivity(),R.style.AppDateTheme_Dialog, endDateSetListener,
-					e_mYear, e_mMonth, e_mDay).show();
+			new DatePickerDialog(getActivity(), R.style.AppDateTheme_Dialog,
+					endDateSetListener, e_mYear, e_mMonth, e_mDay).show();
+			break;
+		case R.id.et_ben_date:
+			new DatePickerDialog(getActivity(), R.style.AppDateTheme_Dialog,
+					benDateSetListener, b_mYear, b_mMonth, b_mDay).show();
+			break;
+		case R.id.et_end_date:
+			new DatePickerDialog(getActivity(), R.style.AppDateTheme_Dialog,
+					endDateSetListener, e_mYear, e_mMonth, e_mDay).show();
 			break;
 		case R.id.tab_spinner_right:
 			et_os.performClick();

@@ -106,7 +106,7 @@ public class ComplainActivity extends Activity implements OnClickListener {
 				complain_others.setText("");
 				Toast.makeText(ComplainActivity.this, "提交成功，感谢您的投诉，我们会及时处理!",
 						Toast.LENGTH_SHORT).show();
-				TrackFragment.rel = 1;
+				TrackFragment.rel_complaint = 1;
 				// getFragmentManager().popBackStack();
 				ComplainActivity.this.finish();
 				break;
@@ -125,24 +125,24 @@ public class ComplainActivity extends Activity implements OnClickListener {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this)
-					.setTitle("安徽中烟物流管控平台")
-					.setIcon(R.drawable.ic_launcher)
-					.setCancelable(false)
-					.setMessage("确定退出吗？")
-					.setPositiveButton("确定",
-							new DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int arg1) {
-									// TODO Auto-generated method stub
-									ExitApplication.getInstance().exit();// 全部销毁栈内activity
-								}
-
-							}).setNegativeButton("取消", null);
-			builder.show();
-
+			// AlertDialog.Builder builder = new AlertDialog.Builder(this)
+			// .setTitle("安徽中烟物流管控平台")
+			// .setIcon(R.drawable.ic_launcher)
+			// .setCancelable(false)
+			// .setMessage("确定退出吗？")
+			// .setPositiveButton("确定",
+			// new DialogInterface.OnClickListener() {
+			//
+			// @Override
+			// public void onClick(DialogInterface dialog,
+			// int arg1) {
+			// // TODO Auto-generated method stub
+			// ExitApplication.getInstance().exit();// 全部销毁栈内activity
+			// }
+			//
+			// }).setNegativeButton("取消", null);
+			// builder.show();
+			finish();
 			return true;
 		} else
 			return super.onKeyDown(keyCode, event);
@@ -168,66 +168,70 @@ public class ComplainActivity extends Activity implements OnClickListener {
 			complain_button_search.setVisibility(View.GONE);
 			complain_layout1.setVisibility(View.VISIBLE);
 			complain_commitall.setVisibility(View.VISIBLE);
-			if (alarmInfo.getMobileComplaint().size() !=0
+			if (alarmInfo.getMobileComplaint().size() != 0
 					&& alarmInfo.getMobileComplaint().get(0).getIsAccept()
 							.equals("1")
 					&& alarmInfo.getcomplaint_flag().equals("1")) {
 				// 初始化参数
-//				complain_CustomName.setText(alarmInfo.getCustomName());
-//				complain_ContractNumber.setText(alarmInfo.getContractNumber());
-//				complain_NcCreateDate.setText(TimeUtils.dateToStr(
-//						alarmInfo.getNcCreateDate()).substring(0, 10));
-//				contractNumber_tv_complain.setText(alarmInfo
-//						.getContractNumber());
-//				repertoryName_tv_complain.setText(alarmInfo.getRepertoryName());
-//				customName_tv_complain.setText(alarmInfo.getCustomName());
-//				plannedArrivedDate_tv_complain.setText(TimeUtils
-//						.dateToStr(alarmInfo.getNcCreateDate()));
-//				// 隐藏投诉，显示受理结果
-//				complain_commitall.setVisibility(View.GONE);
-//				complain_flag.setVisibility(View.VISIBLE);
-				
-				//------
-				
-				//------
+				// complain_CustomName.setText(alarmInfo.getCustomName());
+				// complain_ContractNumber.setText(alarmInfo.getContractNumber());
+				// complain_NcCreateDate.setText(TimeUtils.dateToStr(
+				// alarmInfo.getNcCreateDate()).substring(0, 10));
+				// contractNumber_tv_complain.setText(alarmInfo
+				// .getContractNumber());
+				// repertoryName_tv_complain.setText(alarmInfo.getRepertoryName());
+				// customName_tv_complain.setText(alarmInfo.getCustomName());
+				// plannedArrivedDate_tv_complain.setText(TimeUtils
+				// .dateToStr(alarmInfo.getNcCreateDate()));
+				// // 隐藏投诉，显示受理结果
+				// complain_commitall.setVisibility(View.GONE);
+				// complain_flag.setVisibility(View.VISIBLE);
+
+				// ------
+
+				// ------
 				tv_results.setVisibility(View.VISIBLE);
 				checkBox1.setEnabled(false);
 				checkBox2.setEnabled(false);
 				checkBox3.setEnabled(false);
 				complain_others.setEnabled(false);
-//				Bundle bundle2 = new Bundle();
-//				bundle2.putString("change_title", "change_back");
-//				fragmentCallBack.callbackFun1(bundle2);
+				// Bundle bundle2 = new Bundle();
+				// bundle2.putString("change_title", "change_back");
+				// fragmentCallBack.callbackFun1(bundle2);
 				complain_bt1.setVisibility(View.GONE);
-				if(alarmInfo.getMobileComplaint().get(0).getNoIntimeAssess().equals("1")){
+				if (alarmInfo.getMobileComplaint().get(0).getNoIntimeAssess()
+						.equals("1")) {
 					checkBox1.setChecked(true);
 					complain_one.setTextColor(getResources().getColor(
 							R.color.complain_select));
-				}else{
+				} else {
 					checkBox1.setChecked(false);
 					complain_one.setTextColor(getResources().getColor(
 							R.color.complain_unselect));
 				}
-				if(alarmInfo.getMobileComplaint().get(0).getNoAnswerPhone().equals("1")){
+				if (alarmInfo.getMobileComplaint().get(0).getNoAnswerPhone()
+						.equals("1")) {
 					checkBox2.setChecked(true);
 					complain_two.setTextColor(getResources().getColor(
 							R.color.complain_select));
-				}else{
+				} else {
 					checkBox2.setChecked(false);
 					complain_two.setTextColor(getResources().getColor(
 							R.color.complain_unselect));
 				}
-				if(alarmInfo.getMobileComplaint().get(0).getErrorPhoneNumber().equals("1")){
+				if (alarmInfo.getMobileComplaint().get(0).getErrorPhoneNumber()
+						.equals("1")) {
 					checkBox3.setChecked(true);
 					complain_three.setTextColor(getResources().getColor(
 							R.color.complain_select));
-				}else{
+				} else {
 					checkBox3.setChecked(false);
 					complain_three.setTextColor(getResources().getColor(
 							R.color.complain_unselect));
 				}
-				complain_others.setText(alarmInfo.getMobileComplaint().get(0).getRemark());
-				
+				complain_others.setText(alarmInfo.getMobileComplaint().get(0)
+						.getRemark());
+
 				// 初始化参数
 				complain_CustomName.setText(alarmInfo.getCustomName());
 				complain_ContractNumber.setText(alarmInfo.getContractNumber());
@@ -239,56 +243,67 @@ public class ComplainActivity extends Activity implements OnClickListener {
 				customName_tv_complain.setText(alarmInfo.getCustomName());
 				plannedArrivedDate_tv_complain.setText(TimeUtils
 						.dateToStr(alarmInfo.getNcCreateDate()));
-				
-				complain_flag.setVisibility(View.VISIBLE);
-				
+
+				// complain_flag.setVisibility(View.VISIBLE);
+				complain_flag.setText("已受理");
+
 				complain_results.setText(alarmInfo.getMobileComplaint().get(0)
 						.getFeedback());
 				complain_result.setVisibility(View.VISIBLE);
 
-			} 
-			else if (alarmInfo.getMobileComplaint().size() !=0
-					&& alarmInfo.getMobileComplaint().get(0).getIsAccept()
-					.equals("0")
-			&& alarmInfo.getcomplaint_flag().equals("1")){
+			} else if (alarmInfo.getMobileComplaint().size() != 0
+					&& (alarmInfo.getMobileComplaint().get(0).getIsAccept()
+							.equals("0") || alarmInfo.getMobileComplaint()
+							.get(0).getIsAccept().equals("10"))
+
+					&& alarmInfo.getcomplaint_flag().equals("1")) {
 				checkBox1.setEnabled(false);
 				checkBox2.setEnabled(false);
 				checkBox3.setEnabled(false);
 				complain_others.setEnabled(false);
-				//Bundle bundle2 = new Bundle();
-				complain_flag.setText("已投诉");
-				complain_flag.setVisibility(View.VISIBLE);
-				//bundle2.putString("change_title", "change_back");
-				//fragmentCallBack.callbackFun1(bundle2);
+				// Bundle bundle2 = new Bundle();
+				if (alarmInfo.getMobileComplaint().get(0).getIsAccept().equals("10")) {
+					complain_flag.setText("受理中");
+					complain_flag.setVisibility(View.VISIBLE);
+				} else {
+					complain_flag.setText("已投诉");
+					complain_flag.setVisibility(View.VISIBLE);
+				}
+				// bundle2.putString("change_title", "change_back");
+				// fragmentCallBack.callbackFun1(bundle2);
 				complain_bt1.setVisibility(View.GONE);
-				if(alarmInfo.getMobileComplaint().get(0).getNoIntimeAssess().equals("1")){
+				if (alarmInfo.getMobileComplaint().get(0).getNoIntimeAssess()
+						.equals("1")) {
 					checkBox1.setChecked(true);
 					complain_one.setTextColor(getResources().getColor(
 							R.color.complain_select));
-				}else{
+				} else {
 					checkBox1.setChecked(false);
 					complain_one.setTextColor(getResources().getColor(
 							R.color.complain_unselect));
 				}
-				if(alarmInfo.getMobileComplaint().get(0).getNoAnswerPhone().equals("1")){
+				if (alarmInfo.getMobileComplaint().get(0).getNoAnswerPhone()
+						.equals("1")) {
 					checkBox2.setChecked(true);
 					complain_two.setTextColor(getResources().getColor(
 							R.color.complain_select));
-				}else{
+				} else {
 					checkBox2.setChecked(false);
 					complain_two.setTextColor(getResources().getColor(
 							R.color.complain_unselect));
 				}
-				if(alarmInfo.getMobileComplaint().get(0).getErrorPhoneNumber().equals("1")){
+				if (alarmInfo.getMobileComplaint().get(0).getErrorPhoneNumber()
+						.equals("1")) {
 					checkBox3.setChecked(true);
 					complain_three.setTextColor(getResources().getColor(
 							R.color.complain_select));
-				}else{
+				} else {
 					checkBox3.setChecked(false);
 					complain_three.setTextColor(getResources().getColor(
 							R.color.complain_unselect));
 				}
-				complain_others.setText(alarmInfo.getMobileComplaint().get(0).getRemark());
+				complain_others.setText(alarmInfo.getMobileComplaint().get(0)
+						.getRemark());
 				// 初始化参数
 				complain_CustomName.setText(alarmInfo.getCustomName());
 				complain_ContractNumber.setText(alarmInfo.getContractNumber());
@@ -300,12 +315,11 @@ public class ComplainActivity extends Activity implements OnClickListener {
 				customName_tv_complain.setText(alarmInfo.getCustomName());
 				plannedArrivedDate_tv_complain.setText(TimeUtils
 						.dateToStr(alarmInfo.getNcCreateDate()));
-				
-			}
-			else {
-//				Bundle bundle2 = new Bundle();
-//				bundle2.putString("change_title", "change_back");
-//				fragmentCallBack.callbackFun1(bundle2);
+
+			} else {
+				// Bundle bundle2 = new Bundle();
+				// bundle2.putString("change_title", "change_back");
+				// fragmentCallBack.callbackFun1(bundle2);
 				// 初始化参数
 				complain_CustomName.setText(alarmInfo.getCustomName());
 				complain_ContractNumber.setText(alarmInfo.getContractNumber());
@@ -320,9 +334,9 @@ public class ComplainActivity extends Activity implements OnClickListener {
 			}
 
 		} else {
-//			Bundle bundle2 = new Bundle();
-//			bundle2.putString("change_title", "change_back_home");
-//			fragmentCallBack.callbackFun1(bundle2);
+			// Bundle bundle2 = new Bundle();
+			// bundle2.putString("change_title", "change_back_home");
+			// fragmentCallBack.callbackFun1(bundle2);
 		}
 	}
 
@@ -333,7 +347,7 @@ public class ComplainActivity extends Activity implements OnClickListener {
 		layout_title_tv_name.setText(R.string.menu_text_complain);
 		title_back2 = (Button) findViewById(R.id.title_back2);
 		title_back2.setOnClickListener(this);
-		
+
 		tv_results = (TextView) findViewById(R.id.tv_results);
 
 		flag = false;
@@ -342,11 +356,11 @@ public class ComplainActivity extends Activity implements OnClickListener {
 		complain_layout1.setVisibility(View.GONE);
 		complain_results = (TextView) findViewById(R.id.complain_results);
 		complain_flag = (TextView) findViewById(R.id.complain_flag);
-		complain_flag.setVisibility(View.GONE);
+		// complain_flag.setVisibility(View.GONE);
 		complain_commitall = (LinearLayout) findViewById(R.id.complain_commitall);
 		complain_commitall.setVisibility(View.GONE);
 		complain_result = (LinearLayout) findViewById(R.id.complain_result);
-		//complain_result.setVisibility(View.GONE);
+		// complain_result.setVisibility(View.GONE);
 		complain_CustomName = (EditText) findViewById(R.id.complain_CustomName);
 		complain_ContractNumber = (EditText) findViewById(R.id.complain_ContractNumber);
 		complain_NcCreateDate = (EditText) findViewById(R.id.complain_NcCreateDate);
@@ -483,8 +497,15 @@ public class ComplainActivity extends Activity implements OnClickListener {
 				m1.put("noAnswerPhone", (checkBox2.isChecked() ? "1" : "0"));
 				// 驾驶员联系方式不正确
 				m1.put("errorPhoneNumber", (checkBox3.isChecked() ? "1" : "0"));
+
 				// 其他
-				m1.put("remark", complain_others.getText().toString());
+				if (complain_others.getText().toString().trim().length() > 60) {
+					Toast.makeText(ComplainActivity.this,
+							"您输入的内容已超过限定字数 ,无法提交", Toast.LENGTH_SHORT).show();
+					return;
+				} else {
+					m1.put("remark", complain_others.getText().toString());
+				}
 
 				// 投诉人ID
 				m1.put("complaintUserId", ComplainActivity.this

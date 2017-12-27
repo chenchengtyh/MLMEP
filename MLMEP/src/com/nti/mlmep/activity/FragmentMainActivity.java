@@ -4,6 +4,7 @@ import com.nti.mlmep.R;
 import com.nti.mlmep.domain.TrackInfoBean;
 import com.nti.mlmep.util.ExitApplication;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
@@ -23,7 +24,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentMainActivity extends Activity implements FragmentCallBack {
+public class FragmentMainActivity extends Activity implements FragmentCallBack,
+		BackFragmentInterFace {
 
 	/** 底部导航 */
 	private RadioGroup fmainTab;
@@ -32,6 +34,7 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 	private RadioButton fradio_button_monitor;
 	private RadioButton fradio_button_complain;
 	private RadioButton fradio_button_logoff;
+	private RadioButton fradio_button_users;
 
 	private FragmentManager fm;
 	private FragmentTransaction ft;
@@ -49,9 +52,12 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 	static TextView layout_title_tv;
 
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public void onBackPressed() {
 		// TODO Auto-generated method stub
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+
+		if (getFragmentManager().findFragmentByTag("TabFragment") != null
+				&& getFragmentManager().findFragmentByTag("TabFragment")
+						.isVisible()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this)
 					.setTitle("安徽中烟物流管控平台")
 					.setIcon(R.drawable.ic_launcher)
@@ -64,15 +70,150 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 								public void onClick(DialogInterface dialog,
 										int arg1) {
 									// TODO Auto-generated method stub
-									ExitApplication.getInstance().exit();//全部销毁栈内activity
+									ExitApplication.getInstance().exit();// 全部销毁栈内activity
 								}
 
 							}).setNegativeButton("取消", null);
 			builder.show();
+			return;
+		} else if (getFragmentManager().findFragmentByTag("TrackFragment") != null
+				&& getFragmentManager().findFragmentByTag("TrackFragment")
+						.isVisible()) {
+			getFragmentManager().popBackStack();
 
-			return true;
-		} else
-			return super.onKeyDown(keyCode, event);
+		} else if (getFragmentManager()
+				.findFragmentByTag("TrackDetailFragment") != null
+				&& getFragmentManager()
+						.findFragmentByTag("TrackDetailFragment").isVisible()) {
+			getFragmentManager().popBackStack();
+		} else if (getFragmentManager().findFragmentByTag(
+				"ComplainSearchFragment") != null
+				&& getFragmentManager().findFragmentByTag(
+						"ComplainSearchFragment").isVisible()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this)
+					.setTitle("安徽中烟物流管控平台")
+					.setIcon(R.drawable.ic_launcher)
+					.setCancelable(false)
+					.setMessage("确定退出吗？")
+					.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int arg1) {
+									// TODO Auto-generated method stub
+									ExitApplication.getInstance().exit();// 全部销毁栈内activity
+								}
+
+							}).setNegativeButton("取消", null);
+			builder.show();
+		} else if (getFragmentManager().findFragmentByTag("ComplainFragment") != null
+				&& getFragmentManager().findFragmentByTag("ComplainFragment")
+						.isVisible()) {
+			getFragmentManager().popBackStack();
+		} else if (getFragmentManager().findFragmentByTag(
+				"AssessSearchFragment") != null
+				&& getFragmentManager().findFragmentByTag(
+						"AssessSearchFragment").isVisible()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this)
+					.setTitle("安徽中烟物流管控平台")
+					.setIcon(R.drawable.ic_launcher)
+					.setCancelable(false)
+					.setMessage("确定退出吗？")
+					.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int arg1) {
+									// TODO Auto-generated method stub
+									ExitApplication.getInstance().exit();// 全部销毁栈内activity
+								}
+
+							}).setNegativeButton("取消", null);
+			builder.show();
+		} else if (getFragmentManager().findFragmentByTag("AssessFragment") != null
+				&& getFragmentManager().findFragmentByTag("AssessFragment")
+						.isVisible()) {
+			getFragmentManager().popBackStack();
+		} else if (getFragmentManager().findFragmentByTag("Assess2Fragment") != null
+				&& getFragmentManager().findFragmentByTag("Assess2Fragment")
+						.isVisible()) {
+			getFragmentManager().popBackStack();
+		} else if (getFragmentManager().findFragmentByTag("MessageFragment") != null
+				&& getFragmentManager().findFragmentByTag("MessageFragment")
+						.isVisible()) {
+			getFragmentManager().popBackStack();
+
+		} else if(getFragmentManager().findFragmentByTag("UserFragment") != null
+				&& getFragmentManager().findFragmentByTag("UserFragment")
+				.isVisible()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this)
+					.setTitle("安徽中烟物流管控平台")
+					.setIcon(R.drawable.ic_launcher)
+					.setCancelable(false)
+					.setMessage("确定退出吗？")
+					.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int arg1) {
+									// TODO Auto-generated method stub
+									ExitApplication.getInstance().exit();// 全部销毁栈内activity
+								}
+
+							}).setNegativeButton("取消", null);
+			builder.show();
+		}
+		else {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this)
+					.setTitle("安徽中烟物流管控平台")
+					.setIcon(R.drawable.ic_launcher)
+					.setCancelable(false)
+					.setMessage("确定退出吗？")
+					.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int arg1) {
+									// TODO Auto-generated method stub
+									ExitApplication.getInstance().exit();// 全部销毁栈内activity
+								}
+
+							}).setNegativeButton("取消", null);
+			builder.show();
+		}
+
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		// if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
+		// {
+		// AlertDialog.Builder builder = new AlertDialog.Builder(this)
+		// .setTitle("安徽中烟物流管控平台1")
+		// .setIcon(R.drawable.ic_launcher)
+		// .setCancelable(false)
+		// .setMessage("确定退出吗？")
+		// .setPositiveButton("确定",
+		// new DialogInterface.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(DialogInterface dialog,
+		// int arg1) {
+		// // TODO Auto-generated method stub
+		// ExitApplication.getInstance().exit();//全部销毁栈内activity
+		// }
+		//
+		// }).setNegativeButton("取消", null);
+		// builder.show();
+		//
+		// return true;
+		// } else
+		return super.onKeyDown(keyCode, event);
 	}
 
 	public void setTitle2(int name) {
@@ -91,8 +232,8 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_main_fg);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
-		
-		ExitApplication.getInstance().addActivity(this); //入栈用于销毁
+
+		ExitApplication.getInstance().addActivity(this); // 入栈用于销毁
 
 		fmainTab = (RadioGroup) findViewById(R.id.fmain_radiogroup);
 		layout_title_tv = (TextView) findViewById(R.id.layout_title_tv);
@@ -127,14 +268,19 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 					changeComplain2(alarmInfo);
 					break;
 				// 消息
-				case R.id.fradio_button_logoff:
-					setTitle2(R.string.menu_text_access);
-					messagePage();
+//				case R.id.fradio_button_logoff:
+//					setTitle2(R.string.menu_text_access);
+//					messagePage();
+//					break;
+				case R.id.fradio_button_users:
+					setTitle2(R.string.menu_text_user);
+					infoPage();
 					break;
 				default:
 					break;
 				}
 			}
+
 		});
 		/** 默认选择第一个 */
 		homePage();
@@ -143,16 +289,16 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 	/*
 	 * 消息页
 	 */
-	protected void messagePage() {
-		// TODO Auto-generated method stub
-		ft = fm.beginTransaction();
-		MessageFragment tab1 = new MessageFragment();
-		Bundle bundle = new Bundle();
-		bundle.putString("flag_page", "消息");
-		tab1.setArguments(bundle);
-		ft.replace(R.id.frame_container, tab1);
-		ft.commit();
-	}
+//	protected void messagePage() {
+//		// TODO Auto-generated method stub
+//		ft = fm.beginTransaction();
+//		MessageFragment tab1 = new MessageFragment();
+//		Bundle bundle = new Bundle();
+//		bundle.putString("flag_page", "消息");
+//		tab1.setArguments(bundle);
+//		ft.replace(R.id.frame_container, tab1, "MessageFragment");
+//		ft.commit();
+//	}
 
 	/*
 	 * 评价页
@@ -165,7 +311,7 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 		// bundle.putString("flag_page", "评价");
 		// bundle.putSerializable("map", alarmInfo);
 		tab1.setArguments(bundle);
-		ft.replace(R.id.frame_container, tab1);
+		ft.replace(R.id.frame_container, tab1, "AssessSearchFragment");
 		// ft.addToBackStack(null);
 		ft.commit();
 	}
@@ -180,7 +326,7 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 		Bundle bundle = new Bundle();
 		bundle.putString("flag_page", "物流");
 		tab1.setArguments(bundle);
-		ft.replace(R.id.frame_container, tab1);
+		ft.replace(R.id.frame_container, tab1, "TabFragment");
 		ft.commit();
 	}
 
@@ -196,7 +342,7 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 		Bundle bundle = new Bundle();
 		bundle.putString("flag_page", "首页");
 		tab1.setArguments(bundle);
-		ft.replace(R.id.frame_container, tab1);
+		ft.replace(R.id.frame_container, tab1, "TabFragment");
 		ft.commit();
 	}
 
@@ -209,9 +355,25 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 		ComplainSearchFragment tab1 = new ComplainSearchFragment();
 		Bundle bundle = new Bundle();
 		// bundle.putString("flag_page", "投诉");
-		//bundle.putSerializable("map", alarmInfo);
+		// bundle.putSerializable("map", alarmInfo);
 		tab1.setArguments(bundle);
-		ft.replace(R.id.frame_container, tab1);
+		ft.replace(R.id.frame_container, tab1, "ComplainSearchFragment");
+		ft.commit();
+	}
+	
+	/*
+	 * 我的个人信息页
+	 */
+	private void infoPage() {
+		// TODO Auto-generated method stub
+		
+		ft = fm.beginTransaction();
+		UserFragment tab1 = new UserFragment();
+		Bundle bundle = new Bundle();
+		// bundle.putString("flag_page", "投诉");
+		// bundle.putSerializable("map", alarmInfo);
+		tab1.setArguments(bundle);
+		ft.replace(R.id.frame_container, tab1, "UserFragment");
 		ft.commit();
 	}
 
@@ -264,6 +426,23 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 				}
 			});
 		}
+		
+		if (str.equals("change_back_user")) {
+			// layout_title_tv.setText(R.string.menu_text_alarm);
+			title_back = (Button) findViewById(R.id.title_back);
+			title_back.setVisibility(View.VISIBLE);
+			title_back.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					setTitle2(R.string.menu_text_user);
+					fradio_button_users = (RadioButton) findViewById(R.id.fradio_button_users);
+					fradio_button_users.setChecked(true);
+					infoPage();
+				}
+			});
+		}
 
 	}
 
@@ -290,10 +469,14 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 			changeComplain();
 		}
 		if (str.equals("xiaoxi")) {
-			fradio_button_logoff = (RadioButton) findViewById(R.id.fradio_button_logoff);
-			fradio_button_logoff.setChecked(true);
-			setTitle2(R.string.menu_text_access);
-			//messagePage();
+			//fradio_button_logoff = (RadioButton) findViewById(R.id.fradio_button_logoff);
+			//fradio_button_logoff.setChecked(true);
+			//setTitle2(R.string.menu_text_access);
+			// messagePage();
+			
+			fradio_button_users = (RadioButton) findViewById(R.id.fradio_button_users);
+			fradio_button_users.setChecked(true);
+			setTitle2(R.string.menu_text_user);
 		}
 	}
 
@@ -318,7 +501,7 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("map", alarmInfo);
 			tab1.setArguments(bundle);
-			ft.replace(R.id.frame_container, tab1);
+			ft.replace(R.id.frame_container, tab1, "Assess2Fragment");
 			ft.addToBackStack(null);
 			ft.commit();
 		} else {
@@ -328,7 +511,7 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 			Bundle bundle = new Bundle();
 			// bundle.putSerializable("map", alarmInfo);
 			tab1.setArguments(bundle);
-			ft.replace(R.id.frame_container, tab1);
+			ft.replace(R.id.frame_container, tab1, "AssessSearchFragment");
 			ft.addToBackStack(null);
 			ft.commit();
 		}
@@ -347,7 +530,7 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 			// bundle.putString("flag_page", "投诉");
 			bundle.putSerializable("map", alarmInfo);
 			tab1.setArguments(bundle);
-			ft.replace(R.id.frame_container, tab1);
+			ft.replace(R.id.frame_container, tab1, "ComplainFragment");
 			ft.addToBackStack(null);
 			ft.commit();
 		} else {
@@ -357,7 +540,7 @@ public class FragmentMainActivity extends Activity implements FragmentCallBack {
 			// bundle.putString("flag_page", "投诉");
 			// bundle.putSerializable("map", alarmInfo);
 			tab1.setArguments(bundle);
-			ft.replace(R.id.frame_container, tab1);
+			ft.replace(R.id.frame_container, tab1, "ComplainSearchFragment");
 			ft.addToBackStack(null);
 			ft.commit();
 		}

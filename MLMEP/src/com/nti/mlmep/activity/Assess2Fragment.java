@@ -122,7 +122,7 @@ public class Assess2Fragment extends Fragment implements OnClickListener {
 				// fragmentCallBack.callbackFun3(bundle_bt2);
 				trackFragment.setArguments(bundle_bt2);
 
-				ft.replace(R.id.frame_container, trackFragment);
+				ft.replace(R.id.frame_container, trackFragment,"TrackFragment");
 				ft.addToBackStack(null);
 				// ft.replace(R.id.frame_container, trackFragment);
 //				if (dialog.isShowing())  
@@ -187,7 +187,8 @@ public class Assess2Fragment extends Fragment implements OnClickListener {
 			if(alarmInfo.geteva_flag().equals("1")){//评价过，隐藏提交按钮
 				monitor_bt1.setVisibility(View.GONE);
 				editassess.setEnabled(false);//文本框不可编辑
-				assess_flag.setVisibility(View.VISIBLE);//显示已评价标识
+				//assess_flag.setVisibility(View.VISIBLE);//显示已评价标识
+				assess_flag.setText("已评价");
 				editassess.setText(alarmInfo.getMobileEva().get(0).getremark());
 				if(alarmInfo.getMobileEva().size() != 0){//评价过,有评价信息
 					if(alarmInfo.getMobileEva().get(0).gettotalEvaAssess().equals("0")){
@@ -290,7 +291,8 @@ public class Assess2Fragment extends Fragment implements OnClickListener {
 			}else{
 				monitor_bt1.setVisibility(View.VISIBLE);
 				editassess.setEnabled(true);//文本框可编辑	
-				assess_flag.setVisibility(View.GONE);//隐藏标志
+				//assess_flag.setVisibility(View.GONE);//隐藏标志
+				assess_flag.setText("");
 			}
 			
 		} else {
@@ -441,7 +443,7 @@ public class Assess2Fragment extends Fragment implements OnClickListener {
 			// fragmentCallBack.callbackFun3(bundle_bt2);
 			trackFragment.setArguments(bundle_bt2);
 
-			ft.replace(R.id.frame_container, trackFragment);
+			ft.replace(R.id.frame_container, trackFragment,"TrackFragment");
 			ft.addToBackStack(null);
 			// ft.replace(R.id.frame_container, trackFragment);
 			ft.commit();
@@ -477,7 +479,14 @@ public class Assess2Fragment extends Fragment implements OnClickListener {
 				m1.put("serveAttitudeAssess",
 						String.valueOf(CheckRadioButton(rGroup4.getCheckedRadioButtonId())));
 
-				m1.put("remark", editassess.getText().toString());
+				if (editassess.getText().toString().trim().length() > 60) {
+					Toast.makeText(getActivity(), "您输入的内容已超过限定字数 ,无法提交",
+							Toast.LENGTH_SHORT).show();
+					return;
+				} else {
+					m1.put("remark", editassess.getText().toString());
+				}
+				
 				// gson.toJson(m1);
 				WebServiceUtils wsutils = WebServiceUtils.getInstance();
 				wsutils.setContext(getActivity().getApplicationContext());
@@ -513,7 +522,7 @@ public class Assess2Fragment extends Fragment implements OnClickListener {
 								TimeUtils.DATE_FORMAT_DATE));
 						editassess.setText("");
 						MyDialog.hide();
-						TrackFragment.rel = 1;
+						TrackFragment.rel_assess = 1;
 						getFragmentManager().popBackStack();
 					}
 				} catch (Exception e) {

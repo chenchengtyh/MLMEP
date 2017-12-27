@@ -204,7 +204,7 @@
                             android:layout_width="0.0dip"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8.0dip"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
                             android:text="合同号"
                             android:textColor="#939392"
                             android:textSize="14sp" />
@@ -213,7 +213,7 @@
                             android:id="@+id/contractNumber_tv_complain"
                             android:layout_width="0.0dip"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2.0"
+                            android:layout_weight="2.5"
                             android:textColor="@color/gray"
                             android:textSize="14sp" />
 
@@ -222,10 +222,10 @@
                             android:layout_width="10dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.0"
-                            android:text="已受理"
+                            android:text=""
                             android:textColor="@color/red"
                             android:textSize="16sp"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -446,7 +446,7 @@
                         android:layout_marginRight="8dp"
                         android:background="@drawable/other_out"
                         android:gravity="left"
-                        android:hint="其他:"
+                        android:hint="其他(限定字数60):"
                         android:lines="5"
                         android:text=""
                         android:textSize="14sp" />
@@ -456,7 +456,7 @@
             <LinearLayout
                 android:id="@+id/complain_result"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:layout_marginRight="3dp"
                 android:background="@color/white"
                 android:orientation="vertical"

@@ -20,7 +20,7 @@
     <!-- 定义checkbox style -->
     <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_selector</item>
-        <item name="android:paddingLeft">24.0dip</item>
+        <item name="android:paddingLeft">10.0dip</item>
         <item name="android:maxHeight">30.0dip</item>
     </style>
 

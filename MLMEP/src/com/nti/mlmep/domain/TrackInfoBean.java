@@ -44,7 +44,7 @@ public class TrackInfoBean implements Serializable {
 	private String eva_flag;//评价标志位
     	
 	private List<MobileComplaint> mobileComplaintList; //投诉信息
-	private List<MobileEva> mobileEva; //评价信息
+	private List<MobileEva> mobileEva = null; //评价信息
 	
 	public TrackPosition trackPosition;//订单在途的情况，记录当时的到货地点
 	
@@ -193,22 +193,24 @@ public class TrackInfoBean implements Serializable {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private String evaId;
+		private String evaId = "";
 		private String contractNumber;
 		private String orderId;
 		private String isHighOpinion;
-		private String totalEvaAssess;
+		private String totalEvaAssess = "";
 		private String totalEvaScore;
-		private String intimeAssess;//
+		private String intimeAssess = "";
 		private String intimeScore;
-		private String intactAssess;
+		private String intactAssess = "";
 		private String intactScore;
-		private String serveAttitudeAssess;
+		private String serveAttitudeAssess = "";
 		private String serveAttitudeScore;
 		private String assessPersonId;
 		private String assessPersonName;
+		private String otherAssess = "";
 		private Date assessDatetime;
-		private String remark;
+		private String remark = "";
+		private String evaState = "";
 		
 		public void setevaId(String evaId) {
 			this.evaId = evaId;
@@ -216,6 +218,14 @@ public class TrackInfoBean implements Serializable {
 		
 		public String getevaId() {
 			return evaId;
+		}
+		
+		public void setotherAssess(String otherAssess) {
+			this.otherAssess = otherAssess;
+		}
+		
+		public String getotherAssess() {
+			return otherAssess;
 		}
 
 		public void setcontractNumber(String contractNumber) {
@@ -322,7 +332,14 @@ public class TrackInfoBean implements Serializable {
 		public String getremark() {
 			return remark;
 		}
-	
+		
+		public void setevaState(String evaState) {
+			this.evaState = evaState;
+		}
+		public String getevaState() {
+			return evaState;
+		}
+			
 	}
 	
 	

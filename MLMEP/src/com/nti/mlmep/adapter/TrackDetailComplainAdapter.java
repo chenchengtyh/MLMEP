@@ -78,8 +78,18 @@ import com.nti.mlmep.util.TimeUtils;
 				R.layout.activity_track_compalin, parent, false);
 		TrackInfoBean info = trackinfo.get(position);
 		TextView complain_flag = (TextView) view.findViewById(R.id.complain_flag);
-        if(info.getMobileComplaint().size() != 0 && info.getMobileComplaint().get(0).getIsAccept().equals("1")){
+        if(info.getMobileComplaint().size() != 0 && info.getMobileComplaint().get(0).getIsAccept().equals("1") && info.getcomplaint_flag().equals("1")){
         	complain_flag.setText("已受理");
+        	complain_flag.setTextColor(Color.RED);
+        }
+        
+        if(info.getMobileComplaint().size() != 0 && info.getMobileComplaint().get(0).getIsAccept().equals("10") && info.getcomplaint_flag().equals("1")){
+        	complain_flag.setText("受理中");
+        	complain_flag.setTextColor(Color.RED);
+        }
+        
+        if(info.getMobileComplaint().size() != 0 && info.getMobileComplaint().get(0).getIsAccept().equals("0") && info.getcomplaint_flag().equals("1")){
+        	complain_flag.setText("已投诉");
         	complain_flag.setTextColor(Color.RED);
         }
 		// 订单号
